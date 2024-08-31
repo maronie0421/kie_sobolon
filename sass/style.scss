@@ -1,0 +1,359 @@
+/* @use "sass:map"」は、style.scssの先頭で読み込み */
+@use "sass:map";
+
+
+$main-color: #3EA1D1;
+$text-color:#333333;
+
+$font-base: "Noto Serif JP", serif;
+
+$header-height-sp: 60px;
+$header-height-pc: 70px;
+
+/* breakpointとmixinの設定 */
+/* 1⃣ブレークポイントを定義する */
+$breakpoints: (
+  sm: "screen and (min-width: 600px)",
+  md: "screen and (min-width: 768px)",
+  lg: "screen and (min-width: 900px)",
+  xl: "screen and (min-width: 1200px)",
+);
+
+/* 2⃣次にmixinを記述 */
+@mixin mq($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+/* 3⃣ブレークポイントが必要な時はcssを記述する前にmixinを呼び起こす
+@include breakpoints.mq(pc) {
+→ここからcssを記述していく。
+  }
+}
+ */
+
+
+body {
+  font-family: $font-base; /* google fonts変数 */
+  color: $text-color; /* フォントカラー変数 */
+  font-size: 16px; /* フォントサイズ */
+  line-height: 1.7; /* 行の高さ（行間） */
+  font-weight: 300; /* フォント太さ */
+}
+
+.inner {
+  padding-inline: 15px; /* 左右の余白を一括で指定できる */
+
+  @include mq(md) {
+    max-width: calc(1200px + 40px * 2);
+    /* 余白40pxを担保したまま内側は1200pxを担保する*/
+    margin-inline: auto;
+    /* 左右を中央に揃える */
+    padding-inline: 40px;
+    /* 左右に40pxの余白をつくる */
+  }
+}
+
+.section {}
+
+.section__head {}
+
+.section__content {
+  margin-top: 46px;
+
+  @include mq(md) {
+    margin-top: 64px;
+  }
+}
+
+.heading { /* 共通パーツ（見出し） */
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+  line-height: 100%;
+
+  &::after {
+    content: "";
+    width: 60px;
+    height: 1px;
+    background: $main-color;
+  }
+
+  @include mq(md) {
+    font-size: 40px;
+    gap: 24px;
+  }
+
+}
+
+.button {
+  display: inline-block;
+  min-width: 158px;
+  padding: calc(12px - 1px);
+  text-align: center;
+  border: 1px solid $main-color;
+  background: #FFF;
+  color: $main-color;
+  font-size: 14px;
+  letter-spacing: 0.02px;
+  transition: color 0.3s, background-color 0.3s ;
+
+  &:hover {
+    color: #fff;
+    background-color: $main-color;
+  }
+}
+
+
+.header {
+  height: $header-height-sp;
+
+  @include mq(md) {
+    height: $header-height-pc;
+  }
+}
+
+.header__inner {
+  height: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo {
+  a {
+    img {
+      width: 120px;
+      display: block;
+
+    }
+  }
+}
+
+.header__icon {
+  @include mq(md) {
+    display: none;
+  }
+}
+
+.header__nav {
+  background: $main-color;
+  width: 270px;
+  height: calc(100% - $header-height-sp);
+  position: fixed;
+  right: 0;
+  top: $header-height-sp;
+  padding: calc(40px - 8px) 15px;
+  transform: translateX(100%);/* 最初は100%右に寄せておく */
+  transition: transform 0.4s;
+
+  &.is-checked {
+    transform: translateX(0%);/* is-checkedがついたら0%になるように */
+  }
+
+  @include mq(md) {
+    background: transparent;
+    width: auto;
+    height: auto;
+    position: static;
+    padding: 0;
+    transform: translateX(0);
+  }
+}
+
+.header__lists {
+  display: flex; //縦並び
+  flex-direction: column; //コンテナ内のアイテムを縦方向に並べる
+  align-items: flex-end; //右側によせる
+  gap: calc(32px - 8px * 2);
+
+  @include mq(md) {
+    flex-direction: row; //横並び
+    align-items: center; //上下中央に揃える
+    gap: 46px;
+  }
+}
+
+.header__list {
+
+}
+
+.header__link {
+  display: inline-block;
+  padding-block: 8px; /* 上下の余白 */
+  color: #fff;
+  font-size: 18px;
+
+  @include mq(md) {
+    color: $text-color;
+    font-size: 16px;
+  }
+}
+
+.drawer-icon {
+  width: 30px;
+  height: 18px;
+  position: relative;
+
+  &.is-checked {
+    .drawer-icon__bar {
+      &:nth-child(1),  /* 1番目と3番目の棒が真ん中になるように高さを設定 */
+      &:nth-child(3) {
+        top: 9px;
+      }
+
+      &:nth-child(1) {
+        transform: rotate(45deg); /* 45度回転させる */
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+}
+
+.drawer-icon__bar {
+  position: absolute;
+  width: 30px;
+  height: 2px;
+  left: 0;
+  background: $main-color;
+  transition: top 0.4s, transform 0.4s;
+
+  &:nth-child(1) {
+    top: 0;
+  }
+  &:nth-child(2) {
+    top: 8px;
+  }
+  &:nth-child(3) {
+    top: 16px;
+  }
+}
+
+.main {
+  display: grid;
+  gap: 96px;
+
+  @include mq(md) {
+    gap: 160px;
+  }
+}
+
+.fv {}
+
+.fv__inner {
+  position: relative;
+}
+
+.fv__image {
+  @include mq(md) {
+    max-width: 990px;
+    margin-left: auto; /* 左側を押して右側に寄せる？ */
+    display: block;
+  }
+  img {
+
+  }
+}
+
+.fv__message {
+  margin-top: 30px;
+
+  @include mq(md) {
+    position: absolute; /* fv__innerを起点として */
+    inset-block: 0;
+    margin-block: auto; /* 上下中央に揃える */
+    left: 0;
+    padding: 80px 40px;
+    height: fit-content;
+    background: #fff;
+  }
+}
+
+.fv__title {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.7;
+
+  br {
+    display: none;
+
+    @include mq(md) {
+      display: inline;
+    }
+  }
+}
+
+.fv__text {
+  margin-top: 16px;
+}
+
+.concept {}
+
+.concept__inner {}
+
+.concept__content {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+
+  @include mq(md) {
+    flex-direction: row;
+    align-items: center;
+    gap: calc(80px / 1200px * 100%);
+  }
+}
+
+.concept__image {
+  text-align: center;
+
+  @include mq(md) {
+    width: calc(600px / 1200px * 100%);
+    flex-shrink: 0;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.concept__message {
+  @include mq(md) {
+    flex-grow: 1;
+  }
+}
+
+.concept__title {
+  font-size: 20px;
+  font-weight: 600;
+
+  @include mq(md) {
+    font-size: 18px;
+  }
+
+  @include mq(lg) {
+    font-size: 20px;
+  }
+}
+
+.concept__text {
+  margin-top: 22px;
+
+  @include mq(md) {
+    margin-top: 40px;
+  }
+}
+
+
+
+
