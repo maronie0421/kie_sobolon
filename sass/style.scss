@@ -42,6 +42,30 @@ body {
   font-weight: 300; /* フォント太さ */
 }
 
+@include mq(sm) {
+  .hidden-sm {
+    display: none;
+  }
+}
+
+@include mq(md) {
+  .hidden-md {
+    display: none;
+  }
+}
+
+@include mq(lg) {
+  .hidden-lg {
+    display: none;
+  }
+}
+
+@include mq(xl) {
+  .hidden-xl {
+    display: none;
+  }
+}
+
 .inner {
   padding-inline: 15px; /* 左右の余白を一括で指定できる */
 
@@ -354,6 +378,99 @@ body {
   }
 }
 
+.feature {}
+
+.feature__inner {}
+
+.feature__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  @include mq(md) {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  @include mq(lg) {
+    gap: 60px;
+  }
+
+  @include mq(xl) {
+    gap: 90px;
+  }
+}
+
+.feature__card {
+  background: #FFF;
+  box-shadow: 3px 3px 15px 0px rgba(96, 96, 96, 0.16);
+}
+
+.feature-card__image {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+.feature-card__body {
+  font-weight: 600;
+  text-align: center;
+  padding: 26px;
+}
+
+.about {
+  background: url(../img/sp/about-bg.jpg) no-repeat top center / cover ;
+  position: relative;
+  padding-block: 180px 50px ;
+
+  @include mq(md) {
+    background-image: url(../img/about-bg.jpg);
+    padding-block: 123px 122px ;
+  }
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.12);
+    z-index: 1 ;
+  }
+}
+
+.about__inner {}
+
+.about__content {
+  position: relative;
+  z-index: 2 ;
+  color: #FFF;
+
+  @include mq(md) {
+    width: calc(600px / 1200px * 100%);
+  }
+}
+
+.about__title {
+  font-size: 20px;
+  font-weight: 600;
+
+  @include mq(md) {
+    font-size: 22px;
+  }
+}
+
+.about__text {
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 600;
+
+  @include mq(md) {
+    font-size: 16px;
+  }
+}
 
 
 
