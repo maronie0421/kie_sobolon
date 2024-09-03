@@ -625,6 +625,75 @@ body {
   }
 }
 
+.concept2 {}
+
+.concept2__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include mq(md) {
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @include mq(lg) {
+    gap: 60px;
+  }
+
+  @include mq(xl) {
+    gap: 80px;
+  }
+}
+
+.concept2__image {
+  text-align: center;
+
+  @include mq(md) {
+    width: calc(600px / 1200px * 100%);
+    flex-shrink: 0;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.concept2__message {
+  @include mq(md) {
+    flex-grow: 1;
+  }
+}
+
+.concept2__title {
+  font-size: 20px;
+  font-weight: 600;
+
+  @include mq(md) {
+    font-size: 22px;
+  }
+
+  @include mq(lg) {
+    font-size: 25px;
+  }
+
+  @include mq(xl) {
+    font-size: 28px;
+  }
+}
+
+.concept2__text {
+  margin-top: 22px;
+  font-size: 14px;
+
+  @include mq(md) {
+    margin-top: 36px;
+    font-size: 16px;
+  }
+}
+
+
 
 
 
