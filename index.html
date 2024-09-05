@@ -247,10 +247,10 @@
       </div>
     </div>
 
-    <section class="section__contact section">
+    <section class="contact section">
       <div class="contact__inner inner">
-        <h2 class="heading section__head">Contact</h2>
-        <form action="" class="contact__form">
+        <h2 class="heading section__head contact__head">Contact</h2>
+        <form action="" class="contact__form section__content">
           <p class="contact__text">
             <span class="is-required">＊</span>は入力必須項目です</p>
           <div class="contact__items">
@@ -295,7 +295,7 @@
                       type="radio"
                       name="your-type"
                       id=""
-                      class="form-radio__input">
+                      class="form-radio__input checked">
                       <span class="form-radio__text">法人</span>
                   </label>
                   <label class="form-radio">
@@ -312,7 +312,6 @@
                       name="your-type"
                       id=""
                       class="form-radio__input">
-                      <span class="form-radio__text"></span>
                   </label>
                 </div>
               </div>
@@ -320,9 +319,9 @@
 
             <div class="contact__item contact-control">
               <div class="contact-control__head">
-                <label for="your-message" class="form-label">お問い合わせ内容
+                <span class="form-label">お問い合わせ内容
                   <span class="form-label__required">＊</span>
-                </label>
+                </span>
               </div>
               <div class="contact-control__input">
                 <textarea
@@ -333,7 +332,6 @@
                 class="form-textarea"></textarea>
               </div>
             </div>
-
           </div>
           <div class="contact__footer">
             <div class="contact__privacy">
@@ -347,7 +345,7 @@
                   <a href="" target="_blank">プライバシーポリシー</a>に同意します。</span>
               </label>
             </div>
-            <div class="form__submit">
+            <div class="contact__submit">
               <button type="submit" class="button">送信</button>
             </div>
           </div>
